@@ -11,7 +11,7 @@
 - [Module Board](https://github.com/EvntBoard/module-board)
 - [Module OBS](https://github.com/EvntBoard/module-obs)
 
-Install Module from EvntBoard [read documentation](https://www.evntboard.io/docs/getting-started/install-module)
+Install Module from EvntBoard [read documentation](https://www.evntboard.io/docs/getting-started/install-module) with the repo url : https://github.com/AndreLeclercq/module-stream-manager
 
 ## Quick start
 
