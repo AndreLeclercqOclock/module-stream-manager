@@ -6,7 +6,7 @@
 
 ## Install
 
-### Require
+**Require**
 
 - [Module Board](https://github.com/EvntBoard/module-board)
 - [Module OBS](https://github.com/EvntBoard/module-obs)
