@@ -1,1 +1,1 @@
-https://github.com/AndreLeclercq/module-stream-manager
+AndreLeclercq/module-stream-manager
