@@ -1,5 +1,5 @@
 /**
- * 
+ *
 MIT License
 
 Copyright (c) 2021 André LECLERCQ
@@ -35,17 +35,13 @@ const SOURCE = async (eventData) => {
   switch (sourceAction) {
     case "show": {
       const sourceSettings = await module["obs"].sceneItemGetSettings(currentScene, sourceName);
-      sourceSettings.visible
-        ? await BOARD.changeColor({ slug: slug, color: "SRC_DISABLE" })
-        : await BOARD.changeColor({ slug: slug, color: "SRC_ENABLE" });
+      await SOURCE_STATUS({ source: sourceSettings, type: "CLASSIC", slug: slug});
       await module["obs"].sceneItemVisibilityToggle(currentScene, sourceName);
       break;
     }
     case "mute": {
       const audioMuteInfo = await module["obs"].sourceGetMute(sourceName);
-      audioMuteInfo.muted
-        ? await BOARD.changeColor({ slug: slug, color: "SRC_ENABLE" })
-        : await BOARD.changeColor({ slug: slug, color: "SRC_DISABLE" });
+      await SOURCE_STATUS({ source: audioMuteInfo, type: "AUDIO", slug: slug});
       await module["obs"].sourceMuteToggle(sourceName);
       break;
     }
@@ -53,3 +49,22 @@ const SOURCE = async (eventData) => {
       console.log("Action not found !");
   }
 };
+
+const SOURCE_STATUS = async ({source, type, slug}) => {
+  switch (type) {
+    case "CLASSIC": {
+      source.visible
+        ? await BOARD.changeColor({ slug: slug, color: "SRC_DISABLE" })
+        : await BOARD.changeColor({ slug: slug, color: "SRC_ENABLE" });
+      break;
+    }
+    case "AUDIO": {
+      source.muted
+        ? await BOARD.changeColor({ slug: slug, color: "SRC_ENABLE" })
+        : await BOARD.changeColor({ slug: slug, color: "SRC_DISABLE" });
+      break;
+    }
+    default:
+      console.log("Type incorrect !")
+  }
+}

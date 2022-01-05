@@ -24,13 +24,39 @@ SOFTWARE.
  */
 
 const SCENE = async (eventData) => {
-  const currentScene = await module["obs"].sceneGetCurrent();
-  const currentSlug = "scn?" + currentScene.name;
-  const newSlug = eventData.payload.slug;
-  const sceneName = newSlug.split("?")[1];
-
-  await BOARD.changeColor({ slug: currentSlug, color: "SCN_DISABLE" });
-  await BOARD.changeColor({ slug: newSlug, color: "SCN_ENABLE" });
+  const sceneName = eventData.payload.slug.split("?")[1].split("&")[0];
 
   await module["obs"].sceneSetCurrent(sceneName);
+  await MANAGE_BUTTONS();
 };
+
+const MANAGE_BUTTONS = async () => {
+  const CACHE_FILENAME = "board/data.json";
+  const data = JSON.parse(file.read(CACHE_FILENAME));
+  const layout = data[0].layout;
+
+  layout.forEach(async element => {
+    const slugPrefix = element.slug.split("?")[0];
+    if (slugPrefix) {
+      switch (slugPrefix) {
+        case "scn":
+          await SCENE_STATUS(element.slug);
+          break;
+        case "src":
+          //await SOURCE_STATUS(eventData);
+          break;
+        default:
+          console.log("Slug Prefix not found");
+      }
+    }
+  });
+}
+
+const SCENE_STATUS = async (slug) => {
+  const currentScene = await module["obs"].sceneGetCurrent();
+  const shortSlug = slug.split("?")[1].split("&")[0];
+
+  shortSlug === currentScene.name
+    ? await BOARD.changeColor({ slug: slug, color: "SCN_ENABLE" })
+    : await BOARD.changeColor({ slug: slug, color: "SCN_DISABLE" });
+}
