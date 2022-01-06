@@ -23,16 +23,20 @@ SOFTWARE.
 
  */
 
-const CONFIG = {
-  colors: {
-    SCN_DISABLE: "#9B9B9B", //Background color of the button of a Scene disabled
-    SCN_ENABLE: "#F5A623", //Background color of the button of a Scene enable
-    SRC_DISABLE: "#D0021B", //Background color of the button of a Source disabled (Hide or Mute)
-    SRC_ENABLE: "#417505", //Background color of the button of a Source enable (Show or Unmute)
-  },
-  messages: {
-    jordson: "Soutenez le projet OpenSource Jordson en mettant une étoile sur Github: https://github.com/jordson-io",
-    evntboard: "La régie de ce stream est piloté avec le projet OpenSource EvntBoard : https://www.evntboard.io",
-    binogure: "Envie d'un stream de création de jeu video ? Rendez vous sur la chaine twitch de Binogure Studio : https://twitch.tv/binogure",
-  }
+const type = "CLASSIC"; //  CLASSIC / THROTTLE / QUEUE / QUEUE_LOCK / THROTTLE_LOCK
+
+const locker = null; // Only required for QUEUE_LOCK & THROTTLE_LOCK types
+
+const conditions = {
+  "twitch-message": ({ payload }) => payload.message !== "",
 };
+
+async function reaction(eventData) {
+  const message = eventData.payload.message;
+  if(message.startsWith("!")) {
+    const command = message.substr(1);
+    await COMMAND(command);
+  } else {
+    //TODO: Create tchat !!
+  }
+}

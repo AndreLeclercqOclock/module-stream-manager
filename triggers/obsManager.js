@@ -42,6 +42,9 @@ async function reaction(eventData) {
       case "src":
         await SOURCE(eventData);
         break;
+      case "say":
+        await SAY(eventData);
+        break;
       default:
         console.log("Slug Prefix not found");
     }
