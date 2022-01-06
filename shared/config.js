@@ -31,8 +31,6 @@ const CONFIG = {
     SRC_ENABLE: "#417505", //Background color of the button of a Source enable (Show or Unmute)
   },
   messages: {
-    jordson: "Soutenez le projet OpenSource Jordson en mettant une étoile sur Github: https://github.com/jordson-io",
-    evntboard: "La régie de ce stream est piloté avec le projet OpenSource EvntBoard : https://www.evntboard.io",
-    binogure: "Envie d'un stream de création de jeu video ? Rendez vous sur la chaine twitch de Binogure Studio : https://twitch.tv/binogure",
+    test: "This is a test command",
   }
 };
