@@ -43,7 +43,7 @@ const MANAGE_BUTTONS = async () => {
           await SCENE_STATUS(element.slug);
           break;
         case "src":
-          //await SOURCE_STATUS(eventData);
+          await SOURCE_STATUS(element.slug);
           break;
         default:
           console.log("Slug Prefix not found");

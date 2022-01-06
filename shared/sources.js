@@ -25,43 +25,47 @@ SOFTWARE.
  */
 
 const SOURCE = async (eventData) => {
-  const slug = eventData.payload.slug;
-  const source = slug.split("?")[1];
-  const sourceElements = source.split("&");
-  const sourceName = sourceElements[0];
-  const sourceAction = sourceElements[1];
+  const slug = eventData.payload.slug
+  const source = slug.split("?")[1].split("&");
+  const sourceName = source[0];
+  const sourceAction = source[1];
   const currentScene = await module["obs"].sceneGetCurrent();
 
   switch (sourceAction) {
     case "show": {
-      const sourceSettings = await module["obs"].sceneItemGetSettings(currentScene, sourceName);
-      await SOURCE_STATUS({ source: sourceSettings, type: "CLASSIC", slug: slug});
       await module["obs"].sceneItemVisibilityToggle(currentScene, sourceName);
       break;
     }
     case "mute": {
-      const audioMuteInfo = await module["obs"].sourceGetMute(sourceName);
-      await SOURCE_STATUS({ source: audioMuteInfo, type: "AUDIO", slug: slug});
       await module["obs"].sourceMuteToggle(sourceName);
       break;
     }
     default:
       console.log("Action not found !");
-  }
+  };
+
+  await SOURCE_STATUS(slug);
 };
 
-const SOURCE_STATUS = async ({source, type, slug}) => {
-  switch (type) {
-    case "CLASSIC": {
-      source.visible
-        ? await BOARD.changeColor({ slug: slug, color: "SRC_DISABLE" })
-        : await BOARD.changeColor({ slug: slug, color: "SRC_ENABLE" });
-      break;
-    }
-    case "AUDIO": {
-      source.muted
+const SOURCE_STATUS = async (slug) => {
+  const source = slug.split("?")[1].split("&");
+  const sourceName = source[0];
+  const sourceAction = source[1];
+  const currentScene = await module["obs"].sceneGetCurrent();
+
+  switch (sourceAction) {
+    case "show": {
+      const sourceSettings = await module["obs"].sceneItemGetSettings(currentScene, sourceName);
+      sourceSettings.visible
         ? await BOARD.changeColor({ slug: slug, color: "SRC_ENABLE" })
         : await BOARD.changeColor({ slug: slug, color: "SRC_DISABLE" });
+      break;
+    }
+    case "mute": {
+      const audioMuteInfo = await module["obs"].sourceGetMute(sourceName);
+      audioMuteInfo.muted
+        ? await BOARD.changeColor({ slug: slug, color: "SRC_DISABLE" })
+        : await BOARD.changeColor({ slug: slug, color: "SRC_ENABLE" });
       break;
     }
     default:
