@@ -56,14 +56,47 @@ After the source name add `&mute`
 Example:
 `src?Mic&mute`
 
+
+---
+
+### Say
+
+Should start with `say?`
+After the `?` write the command name.
+
+**-> Use a predefined message (into shared/config.js)**
+
+Add the message into `shared/config.js` on "messages"
+
+```
+"command_name": "My message"
+```
+
+And use command name into slug
+
+Example:
+`say?command_name`
+
+You can use it into the chat twitch like this : `!command_name`.
+
+**-> Define message into the slug**
+
+After the command name add `&msg=My message`
+
+Example:
+`say?new_command&msg=This my new message`
+
 ## Advanced
 
 ### Colors
 
 If you want you can change the colors of the buttons from the `shared/config.js` file.
 
+### Messages
+
+Define messages for the chat into the `shared/config.js` file.
+
 ## TODO
 
 - Add Start and Stop streaming managment
 - Add action with countdown
-- Add twitch tchat 'say' manager
