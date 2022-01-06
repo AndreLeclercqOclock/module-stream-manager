@@ -1,6 +1,6 @@
 # Module Stream Manager
 
-**This module will allow you to create automated buttons for OBS management with the Board module of the EvntBoard project.**
+**This module will allow you to create automated buttons for OBS and Twitch management with the Board module of the EvntBoard project.**
 
 [EvntBoard Project](https://github.com/EvntBoard)
 
@@ -10,6 +10,7 @@
 
 - [Module Board](https://github.com/EvntBoard/module-board)
 - [Module OBS](https://github.com/EvntBoard/module-obs)
+- [Module TWITCH](https://github.com/EvntBoard/module-twitch)
 
 Install Module from EvntBoard [read documentation](https://www.evntboard.io/docs/getting-started/install-module) with the repo url : https://github.com/AndreLeclercq/module-stream-manager
 
