@@ -1,3 +1,5 @@
+**Abandoned project**
+
 # Module Stream Manager
 
 **This module will allow you to create automated buttons for OBS and Twitch management with the Board module of the EvntBoard project.**
